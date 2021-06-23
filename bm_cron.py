@@ -21,7 +21,6 @@
 #     time.sleep(20)
 
 
-
 import os
 import time
 import joblib
@@ -31,6 +30,7 @@ print(len(url_set))
 time.sleep(20)
 
 for offset, url in enumerate(url_set):
-    os.system(f'node scrape_details.js {url} {offset}')
-    print(f'Downloaded ===== {offset}')
-    time.sleep(20)
+    print(f'Downloading ===== {url.split("/")[-1]}')
+    os.system(f"node scrape_details.js {url} {offset}")
+    print(f"Downloaded ===== {offset}")
+    # time.sleep(20)
