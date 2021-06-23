@@ -5,3 +5,4 @@
 2. [puppeteer](https://github.com/puppeteer/puppeteer)
 3. [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster)
 4. [Web Scraping with a Headless Browser: A Puppeteer Tutorial](https://www.toptal.com/puppeteer/headless-browser-puppeteer-tutorial)
+5. [Saving and scraping a website with Puppeteer](https://fettblog.eu/scraping-with-puppeteer/)
