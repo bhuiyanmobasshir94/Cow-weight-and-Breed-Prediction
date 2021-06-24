@@ -27,13 +27,15 @@ def all_cattles():
     json_response = scrape(url)
     if json_response["status"] is True:
         data_count = json_response["data"]["count"] + 1
-        print("Data Count => ", json_response["data"]["count"])
         for offset in range(0, data_count, 20):
             url = f"https://admin.bengalmeat.com/api/cattle/?limit=20&offset={offset}"
             json_response = scrape(url)
             DATA_DICT_LIST.extend(json_response["data"]["results"])
     assert (data_count - 1) == len(DATA_DICT_LIST)
-    print("Downloaded data Count => ", len(DATA_DICT_LIST))
+    print("========================================")
+    print("Data count => ", json_response["data"]["count"])
+    print("Downloaded data count => ", len(DATA_DICT_LIST))
+    print("========================================")
 
 
 all_cattles()
@@ -103,10 +105,9 @@ for value in DATA_DICT_LIST:
     value["images_list"] = IMAGES_DICT[value["sku"]]
     FINAL_DATA_DICT[value["sku"]] = dict(value)
 
-print("========================================")
-print("Final data dict total count => ", len(FINAL_DATA_DICT.keys()))
-print("========================================")
-
 joblib.dump(FINAL_DATA_DICT, "pickles/FINAL_DATA_DICT.pkl")
 print("Dumped final data dict")
 
+print("========================================")
+print("Final data dict total count => ", len(FINAL_DATA_DICT.keys()))
+print("========================================")
