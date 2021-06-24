@@ -2,6 +2,7 @@ import requests
 import joblib
 import os
 import json
+import time
 from collections import defaultdict
 from datetime import datetime
 
@@ -43,7 +44,7 @@ ext = str(datetime.today().date()).replace("-", "_")
 
 
 joblib.dump(DATA_DICT_LIST, f"pickles/DATA_DICT_LIST_{ext}.pkl")
-
+print("Dumped data dict list")
 
 IMAGES_DICT = defaultdict(list)
 for value in DATA_DICT_LIST:
@@ -53,7 +54,9 @@ for value in DATA_DICT_LIST:
 
 
 joblib.dump(IMAGES_DICT, f"pickles/IMAGES_DICT_{ext}.pkl")
+print("Dumped images dict")
 
+time.sleep(2)
 
 IMAGES_DICT = dict(IMAGES_DICT)
 
@@ -70,7 +73,6 @@ for key, value in IMAGES_DICT.items():
             if not os.path.exists(img_name):
                 download_image(img_url, img_name)
 
-import time
 
 time.sleep(2)
 
@@ -89,4 +91,26 @@ print("========================================", end="\n")
 print("Total images scraped => ", image_count)
 print("Total cow scraped => ", dir_count, end="\n")
 print("========================================")
+
+DATA_DICT_LIST = joblib.load(f"pickles/DATA_DICT_LIST_{ext}.pkl")
+print("Loaded data dict list")
+IMAGES_DICT = joblib.load(f"pickles/IMAGES_DICT_{ext}.pkl")
+print("Loaded images dict")
+
+if os.path.exists("pickles/FINAL_DATA_DICT.pkl"):
+    FINAL_DATA_DICT = joblib.load("pickles/FINAL_DATA_DICT.pkl")
+    print("Loaded final data dict")
+else:
+    FINAL_DATA_DICT = defaultdict(dict)
+    print("Defined default final data dict")
+for value in DATA_DICT_LIST:
+    value["images_list"] = IMAGES_DICT[value["sku"]]
+    FINAL_DATA_DICT[value["sku"]] = dict(value)
+
+print("========================================")
+print("Final data dict total count => ", len(FINAL_DATA_DICT.keys()))
+print("========================================")
+
+joblib.dump(FINAL_DATA_DICT, "pickles/FINAL_DATA_DICT.pkl")
+print("Dumped final data dict")
 
