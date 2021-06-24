@@ -27,13 +27,13 @@ def all_cattles():
     json_response = scrape(url)
     if json_response["status"] is True:
         data_count = json_response["data"]["count"] + 1
-        print("Data Count ===== ", json_response["data"]["count"])
+        print("Data Count => ", json_response["data"]["count"])
         for offset in range(0, data_count, 20):
             url = f"https://admin.bengalmeat.com/api/cattle/?limit=20&offset={offset}"
             json_response = scrape(url)
             DATA_DICT_LIST.extend(json_response["data"]["results"])
     assert (data_count - 1) == len(DATA_DICT_LIST)
-    print("Downloaded data Count ===== ", len(DATA_DICT_LIST))
+    print("Downloaded data Count => ", len(DATA_DICT_LIST))
 
 
 all_cattles()
