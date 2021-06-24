@@ -1,0 +1,28 @@
+{
+  "name": "scraper-with-puppeteer",
+  "version": "1.0.0",
+  "description": "\"# Scraper-With-Puppeteer\" \r 1. [A Guide to Web Scraping With JavaScript and Node.js](https://hackernoon.com/a-guide-to-web-scraping-with-javascript-and-nodejs-i21l3te1)\r 2. [puppeteer](https://github.com/puppeteer/puppeteer)\r 3. [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster)\r 3. [Slack Incoming Webhooks](https://www.npmjs.com/package/@slack/webhook)",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhuiyanmobasshir94/Scraper-With-Puppeteer.git"
+  },
+  "author": "Mobasshir Bhuiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhuiyanmobasshir94/Scraper-With-Puppeteer/issues"
+  },
+  "homepage": "https://github.com/bhuiyanmobasshir94/Scraper-With-Puppeteer#readme",
+  "dependencies": {
+    "@slack/webhook": "^6.0.0",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^10.0.0",
+    "puppeteer": "^5.0.0",
+    "puppeteer-cluster": "^0.22.0",
+    "request": "^2.81.0"
+  }
+}
