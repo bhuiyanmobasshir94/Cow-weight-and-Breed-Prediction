@@ -136,3 +136,4 @@ node_modules/
 rest_server/db.sqlite3
 bm_outputs/
 images/
+bm_cache/
