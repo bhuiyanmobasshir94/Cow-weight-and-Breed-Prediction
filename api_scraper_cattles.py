@@ -2,7 +2,6 @@ import requests
 import joblib
 import os
 import json
-import time
 from collections import defaultdict
 from datetime import datetime
 
@@ -20,7 +19,7 @@ def download_image(img_url, img_name):
     img_bytes = requests.get(img_url).content
     with open(img_name, "wb") as img_file:
         img_file.write(img_bytes)
-        print(f"{img_name} was downloaded...", end="\r")
+        print(f"{img_name} was downloaded...", end=",")
 
 
 def all_cattles():
@@ -56,7 +55,6 @@ for value in DATA_DICT_LIST:
 joblib.dump(IMAGES_DICT, f"pickles/IMAGES_DICT_{ext}.pkl")
 print("Dumped images dict")
 
-time.sleep(2)
 
 IMAGES_DICT = dict(IMAGES_DICT)
 
@@ -73,8 +71,6 @@ for key, value in IMAGES_DICT.items():
             if not os.path.exists(img_name):
                 download_image(img_url, img_name)
 
-
-time.sleep(2)
 
 image_count = 0
 dir_count = 0
