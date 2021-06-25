@@ -19,7 +19,7 @@ def download_image(img_url, img_name):
     img_bytes = requests.get(img_url).content
     with open(img_name, "wb") as img_file:
         img_file.write(img_bytes)
-        print(f"{img_name} was downloaded...", end=",")
+        print(f"{img_name} was downloaded...")
 
 
 def all_cattles():
@@ -85,9 +85,9 @@ for dirname, _, filenames in os.walk("images"):
         if os.path.exists(os.path.join(dirname, filename)):
             image_count += 1
 
-print("========================================", end="\n")
+print("========================================")
 print("Total images scraped => ", image_count)
-print("Total cow scraped => ", dir_count, end="\n")
+print("Total cow scraped => ", dir_count)
 print("========================================")
 
 DATA_DICT_LIST = joblib.load(f"pickles/DATA_DICT_LIST_{ext}.pkl")
