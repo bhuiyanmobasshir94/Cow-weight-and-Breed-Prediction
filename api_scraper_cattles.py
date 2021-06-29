@@ -111,3 +111,5 @@ print("Dumped final data dict")
 print("========================================")
 print("Final data dict total count => ", len(FINAL_DATA_DICT.keys()))
 print("========================================")
+
+shutdown = input("\n Do you want me to end? Press y to proceed.\n >>> ")
