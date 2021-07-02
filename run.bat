@@ -1,1 +1,3 @@
-call C:/Users/rmirza/.conda/envs/test_1/python.exe f:/Research/Cow-weight-and-Breed-Prediction/api_scraper_cattles.py
+call conda activate test_1
+call python api_scraper_cattles.py
+
