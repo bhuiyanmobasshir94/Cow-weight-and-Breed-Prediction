@@ -112,4 +112,11 @@ print("========================================")
 print("Final data dict total count => ", len(FINAL_DATA_DICT.keys()))
 print("========================================")
 
+print("Shout out from detail scraper >>>")
 import api_scraper_details
+
+print("Shout out from youtube videos to images scraper >>>")
+print("========================================")
+import scrape_youtube2images
+
+shutdown = input("\n Do you want me to end? Press y to proceed.\n >>> ")

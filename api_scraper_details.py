@@ -54,8 +54,6 @@ print(f"total skipped => {already_exists}")
 print(f"Finished in {t2-t1} seconds")
 print("========================================")
 
-shutdown = input("\n Do you want me to end? Press y to proceed.\n >>> ")
-
 
 # data = joblib.load("pickles/FINAL_DATA_DICT.pkl")
 # data_dict = dict(data)
