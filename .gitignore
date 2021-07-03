@@ -137,3 +137,5 @@ rest_server/db.sqlite3
 bm_outputs/
 images/
 bm_cache/
+yt_videos/
+yt_images/
