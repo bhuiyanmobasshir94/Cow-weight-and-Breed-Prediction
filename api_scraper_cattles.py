@@ -119,4 +119,7 @@ print("Shout out from youtube videos to images scraper >>>")
 print("========================================")
 import scrape_youtube2images
 
+print("Shout out from analytics >>>")
+import analytics
+
 shutdown = input("\n Do you want me to end? Press y to proceed.\n >>> ")
