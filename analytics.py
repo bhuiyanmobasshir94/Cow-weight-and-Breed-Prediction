@@ -24,3 +24,8 @@ print(f"[INFO] total hd images collected => {total_hd_images}")
 print(f"[INFO] total youtube images collected => {total_yt_images}")
 print(f"[INFO] total images collected => {total_images}")
 print("==========================================")
+
+os.system("git add .")
+os.system(f'git commit -m "Update on {total_detals} cows"')
+os.system("git push origin main")
+
