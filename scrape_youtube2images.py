@@ -60,7 +60,9 @@ t1 = time.perf_counter()
 #     executor.map(yt2imgs, sku_slug_list)
 
 for args in sku_slug_list:
-    yt2imgs(args)
+    sku, slug = args
+    if slug is not None:
+        yt2imgs(args)
 
 t2 = time.perf_counter()
 
