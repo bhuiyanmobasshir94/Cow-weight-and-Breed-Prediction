@@ -13,6 +13,11 @@
 
 ## Video Classification Resources
 1. [How to use the Keras Functional API for Deep Learning](https://machinelearningmastery.com/keras-functional-api-deep-learning/)
+2. [Multi-input Multi-output Model with Keras Functional API](https://stackoverflow.com/questions/66845924/multi-input-multi-output-model-with-keras-functional-api)
+3. [Video classification with Keras and Deep Learning - PyImageSearch](https://www.pyimagesearch.com/2019/07/15/video-classification-with-keras-and-deep-learning/)
+4. [Keras: Multiple Inputs and Mixed Data - PyImageSearch](https://www.pyimagesearch.com/2019/02/04/keras-multiple-inputs-and-mixed-data/)
+5. [alxcnwy/Deep-Neural-Networks-for-Video-Classification](https://github.com/alxcnwy/Deep-Neural-Networks-for-Video-Classification)
+6. [Introduction to Video Classification and Human Activity Recognition](https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/)
 
 ## Bengalmeat public API
 ```
