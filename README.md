@@ -12,7 +12,7 @@
 2. [Data Management With Python, SQLite, and SQLAlchemy](https://realpython.com/python-sqlite-sqlalchemy/)
 
 ## Video Classification Resources
-1. [How to use Keras function API for deep learning](https://machinelearningmastery.com/keras-functional-api-deep-learning/)
+1. [How to use the Keras Functional API for Deep Learning](https://machinelearningmastery.com/keras-functional-api-deep-learning/)
 
 ## Bengalmeat public API
 ```
