@@ -19,6 +19,7 @@
 5. [alxcnwy/Deep-Neural-Networks-for-Video-Classification](https://github.com/alxcnwy/Deep-Neural-Networks-for-Video-Classification)
 6. [Introduction to Video Classification and Human Activity Recognition](https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/)
 7. [Keras: Multiple outputs and multiple losses](https://www.pyimagesearch.com/2018/06/04/keras-multiple-outputs-and-multiple-losses/)
+8. [3 ways to create a Keras model with TensorFlow 2.0 (Sequential, Functional, and Model Subclassing)](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing/)
 
 ## Bengalmeat public API
 ```
