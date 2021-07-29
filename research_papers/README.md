@@ -10,3 +10,6 @@
 - [Paper ~ 10](https://www.scielo.br/j/rbz/a/YfKWwcVvwsCndmFzSc7pTqw/?lang=en)
 - [Paper ~ 11](https://core.ac.uk/download/pdf/35458266.pdf)
 - [Paper ~ 12](https://www.quora.com/Can-I-predict-the-height-and-weight-of-a-person-through-an-image)
+
+## Github Resources
+1. [Houses Data](https://github.com/emanhamed/Houses-dataset)
