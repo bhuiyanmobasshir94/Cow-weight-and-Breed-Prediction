@@ -1,4 +1,7 @@
 # Cow-weight-and-Breed-Prediction
+## Plans
+1. [Session 4](https://github.com/bhuiyanmobasshir94/NUS-Artificial-Intelligence-Training/tree/main/Sessions/SESSION_4)
+2. [Session 5](https://github.com/bhuiyanmobasshir94/NUS-Artificial-Intelligence-Training/tree/main/Sessions/SESSION_5)
 
 ## Scraper With Puppeteer 
 1. [A Guide to Web Scraping With JavaScript and Node.js](https://hackernoon.com/a-guide-to-web-scraping-with-javascript-and-nodejs-i21l3te1)
