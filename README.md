@@ -26,6 +26,8 @@
 9. [Understanding Embedding Layer in Keras](https://medium.com/analytics-vidhya/understanding-embedding-layer-in-keras-bbe3ff1327ce)
 10. [Deep Learning for Tabular Data using PyTorch](https://towardsdatascience.com/deep-learning-for-tabular-data-using-pytorch-1807f2858320)
 
+## Video data loading
+1. [Video-Dataset-Loading-Pytorch](https://github.com/RaivoKoot/Video-Dataset-Loading-Pytorch)
 ## Bengalmeat public API
 ```
 https://admin.bengalmeat.com/api/cattle/
