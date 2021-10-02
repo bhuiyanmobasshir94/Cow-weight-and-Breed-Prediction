@@ -28,6 +28,11 @@
 
 ## Video data loading
 1. [Video-Dataset-Loading-Pytorch](https://github.com/RaivoKoot/Video-Dataset-Loading-Pytorch)
+
+## Dataset Publish Ideas
+1. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.mdpi.com%2Fjournal%2Fdata)
+2. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.journals.elsevier.com%2Fdata-in-brief)
+
 ## Bengalmeat public API
 ```
 https://admin.bengalmeat.com/api/cattle/
