@@ -141,5 +141,5 @@ yt_videos/
 yt_images/
 pickles/
 evaly/
-data.tar.gz
+*.tar.gz
 .DS_Store
