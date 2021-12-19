@@ -15,13 +15,24 @@ load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Get the details from the .env file
-DATA_VENDOR_URL = os.getenv("DATA_VENDOR_URL", None)
-
+DATA_VENDOR_URL = os.getenv(
+    "DATA_VENDOR_URL", "https://admin.bengalmeat.com/api/cattle/")
 LOGS_DIR = Path(BASE_DIR, os.getenv("LOG_DIR", "logs"))
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
-
 DATALAKE_DIR = Path(BASE_DIR, os.getenv("DATALAKE_DIR", "data"))
 DATALAKE_DIR.mkdir(parents=True, exist_ok=True)
+DETAILS_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("DETAILS_DIR", "details"))
+DETAILS_DIR.mkdir(parents=True, exist_ok=True)
+IMAGES_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("IMAGES_DIR", "images"))
+IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+PICKLES_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("PICKLES_DIR", "pickles"))
+PICKLES_DIR.mkdir(parents=True, exist_ok=True)
+YT_IMAGES_DIR = Path(BASE_DIR, DATALAKE_DIR,
+                     os.getenv("YT_IMAGES_DIR", "yt_images"))
+YT_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+YT_VIDEOS_DIR = Path(BASE_DIR, DATALAKE_DIR,
+                     os.getenv("YT_VIDEOS_DIR", "yt_videos"))
+YT_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Create logger
 logger = logging.getLogger("root")
