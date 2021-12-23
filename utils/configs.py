@@ -15,8 +15,7 @@ load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Get the details from the .env file
-DATA_VENDOR_URL = os.getenv(
-    "DATA_VENDOR_URL", "https://admin.bengalmeat.com/api/cattle/")
+DATA_VENDOR_URL = os.getenv("DATA_VENDOR_URL", None)
 LOGS_DIR = Path(BASE_DIR, os.getenv("LOG_DIR", "logs"))
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 DATALAKE_DIR = Path(BASE_DIR, os.getenv("DATALAKE_DIR", "data"))
@@ -33,6 +32,11 @@ YT_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 YT_VIDEOS_DIR = Path(BASE_DIR, DATALAKE_DIR,
                      os.getenv("YT_VIDEOS_DIR", "yt_videos"))
 YT_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
+DATASET_URL = os.getenv("DATASET_URL", None)
+IMAGES_URL = os.getenv("IMAGES_URL", None)
+YT_IMAGES_URL = os.getenv("YT_IMAGES_URL", None)
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", None)
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", None)
 
 # Create logger
 logger = logging.getLogger("root")
