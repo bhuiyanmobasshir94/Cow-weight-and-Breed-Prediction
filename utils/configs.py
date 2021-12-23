@@ -37,6 +37,8 @@ IMAGES_URL = os.getenv("IMAGES_URL", None)
 YT_IMAGES_URL = os.getenv("YT_IMAGES_URL", None)
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", None)
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", None)
+DATASET_NAME = os.getenv("DATASET_NAME", "dataset.csv")
+DATASET_FILE_PATH = Path(DATALAKE_DIR, DATASET_NAME)
 
 # Create logger
 logger = logging.getLogger("root")
