@@ -143,3 +143,4 @@ pickles/
 evaly/
 *.tar.gz
 .DS_Store
+._*
