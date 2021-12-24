@@ -12,7 +12,10 @@ class S3:
         )
 
     def put_object_to_s3(self, byte_data, bucket_name, folder_name, file_name):
-        key_name = folder_name + '/' + file_name
+        if folder_name == "" or folder_name is None:
+            key_name = file_name
+        else:
+            key_name = folder_name + '/' + file_name
         self.s3.Bucket(bucket_name).put_object(Key=key_name, Body=byte_data)
 
     def list_buckets_and_objects_in_s3(self):

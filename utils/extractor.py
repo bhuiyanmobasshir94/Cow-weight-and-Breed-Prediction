@@ -36,3 +36,10 @@ def extract(folder_path, gz_file_path):
                 shutil.copyfileobj(f_in, f_out)
     else:
         logger.warning(UNKNOWN_FORMAT)
+
+
+def make_tar(source_path):
+    gz_path = source_path + ".tar.gz"
+    with tarfile.open(gz_path, "w:gz") as tar:
+        tar.add(source_path)
+    return gz_path

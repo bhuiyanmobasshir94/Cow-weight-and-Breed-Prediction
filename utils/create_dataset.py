@@ -4,12 +4,16 @@ import sys
 
 import pandas as pd
 
+from aws_wrappers import S3
 from configs import *
+from extractor import make_tar
+
+s3 = S3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 
 file_name = os.path.join(DATALAKE_DIR, "pickles_to_df.csv")
 out_file_name = os.path.join(DATALAKE_DIR, "dataset.csv")
-columns = ['sku', 'type', 'sex', 'color', 'breed', 'age_in_month',
-           'height_in_inch', 'weight_in_kg', 'price', 'size']
+columns = ['sku', 'sex', 'color', 'breed', 'feed', 'age_in_month',
+           'teeth', 'height_in_inch', 'weight_in_kg', 'price', 'size']
 
 null_yt_images_count = 0
 null_yt_videos_count = 0
@@ -58,7 +62,12 @@ else:
         else:
             logger.info("Folder %s doesn't exist", row["sku"])
     # logger.info(f"Columns: {df.columns.values}")
+    df['total_images'] = df['images_count'] + df['yt_images_count']
     df.to_csv(out_file_name, index=False)
+    gz_path = make_tar(out_file_name)
+    base_name = os.path.basename(gz_path)
+    data = open(gz_path, 'rb')
+    s3.put_object_to_s3(data, "cv-datasets-2021", None, base_name)
     logger.info(df.head())
     logger.info("Loaded the dataframe")
     logger.info("Dataframe shape => %s", df.shape)
