@@ -26,7 +26,7 @@ if not len(glob.glob(f"{YT_IMAGES_DIR}/*")) > 0:
     download(YT_IMAGES_URL, str(YT_IMAGES_DIR))
 
 df = pd.read_csv(DATASET_FILE_PATH, usecols=columns)
-logger.info(df.head())
+logger.info(df.head(2))
 for index, row in df.iterrows():
     images_path = os.path.join(IMAGES_DIR, row["sku"])
     yt_images_path = os.path.join(YT_IMAGES_DIR, row["sku"])
@@ -36,5 +36,3 @@ for index, row in df.iterrows():
     if row['yt_images_count'] > 0:
         all_images.extend(glob.glob(f"{yt_images_path}/*.jpg"))
     logger.info(f"{row['sku']} has {len(all_images)} images")
-    for images in all_images:
-        logger.info(images)
