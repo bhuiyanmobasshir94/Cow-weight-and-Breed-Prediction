@@ -7,9 +7,6 @@ import pandas as pd
 from configs import *
 from utilities import *
 
-columns = ['sku', 'type', 'sex', 'color', 'breed', 'age_in_month',
-           'height_in_inch', 'weight_in_kg', 'price', 'size', 'images_count', 'yt_images_count']
-
 if not os.path.exists(DATASET_FILE_PATH):
     logger.warning("Dataset file not found")
     logger.info("Downloading dataset, it may take 1 to 2 minutes")
@@ -25,7 +22,7 @@ if not len(glob.glob(f"{YT_IMAGES_DIR}/*")) > 0:
     logger.info("Downloading yt_images, it may take 85 to 90 minutes")
     download(YT_IMAGES_URL, str(YT_IMAGES_DIR))
 
-df = pd.read_csv(DATASET_FILE_PATH, usecols=columns)
+df = pd.read_csv(DATASET_FILE_PATH)
 logger.info(df.head(2))
 for index, row in df.iterrows():
     images_path = os.path.join(IMAGES_DIR, row["sku"])
