@@ -63,6 +63,8 @@ else:
             logger.info("Folder %s doesn't exist", row["sku"])
     # logger.info(f"Columns: {df.columns.values}")
     df['total_images'] = df['images_count'] + df['yt_images_count']
+    df.rename(columns={'age_in_month': 'age_in_year'}, inplace=True)
+    df.age_in_year = df.age_in_year.apply(lambda x: x.split(" ")[0])
     df.to_csv(out_file_name, index=False)
     gz_path = make_tar(out_file_name)
     base_name = os.path.basename(gz_path)
