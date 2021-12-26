@@ -71,7 +71,6 @@ else:
     df.loc[335, "size"] = "MINIMUM"
     df.loc[373, "size"] = "EXTRA_LARGE"
     df.drop([334], inplace=True)
-    df.reset_index(inplace=True)
     df.to_csv(out_file_name, index=False)
     gz_path = make_tar(out_file_name)
     base_name = os.path.basename(gz_path)
