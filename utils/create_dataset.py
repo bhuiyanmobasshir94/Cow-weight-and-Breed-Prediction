@@ -65,6 +65,13 @@ else:
     df['total_images'] = df['images_count'] + df['yt_images_count']
     df.rename(columns={'age_in_month': 'age_in_year'}, inplace=True)
     df.age_in_year = df.age_in_year.apply(lambda x: x.split(" ")[0])
+    df.loc[231, "weight_in_kg"] = 185
+    df.loc[97, "weight_in_kg"] = 190
+    df.loc[486, "weight_in_kg"] = 192
+    df.loc[335, "size"] = "MINIMUM"
+    df.loc[373, "size"] = "EXTRA_LARGE"
+    df.drop([334], inplace=True)
+    df.reset_index(inplace=True)
     df.to_csv(out_file_name, index=False)
     gz_path = make_tar(out_file_name)
     base_name = os.path.basename(gz_path)
