@@ -33,8 +33,9 @@
 1. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.mdpi.com%2Fjournal%2Fdata)
 2. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.journals.elsevier.com%2Fdata-in-brief)
 
-## Data Generator
+## Curated List
 1. [Write your own Custom Data Generator for TensorFlow Keras](https://medium.com/analytics-vidhya/write-your-own-custom-data-generator-for-tensorflow-keras-1252b64e41c3)
+2. [Stackoverflow thread](https://stackoverflow.com/a/25421946/7195890)
 
 ## Bengalmeat public API
 ```
