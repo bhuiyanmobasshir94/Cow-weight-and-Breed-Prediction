@@ -78,7 +78,6 @@ print("========================================")
 
 yt_video_path_list = []
 for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/yt_videos"):
-    print(dirname)
     for filename in filenames:
         sku = dirname.split("/")[-1]
         yt_video_path_list.append(
