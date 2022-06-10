@@ -35,15 +35,15 @@ def bytes_to_unit(bytes, unit):
 
 total_yt_images = 0
 total_hd_images = 0
-for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/yt_images"):
+for dirname, _, filenames in os.walk(YT_IMAGES_DIR):
     for filename in filenames:
-        file_path = f"{dirname}\{filename}"
+        file_path = f"{dirname}/{filename}"
         if os.path.exists(file_path):
             total_yt_images += 1
 
-for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/images"):
+for dirname, _, filenames in os.walk(IMAGES_DIR):
     for filename in filenames:
-        file_path = f"{dirname}\{filename}"
+        file_path = f"{dirname}/{filename}"
         if os.path.exists(file_path):
             total_hd_images += 1
 
@@ -57,15 +57,15 @@ print(f"[INFO] total youtube images collected => {total_yt_images}")
 print(f"[INFO] total images collected => {total_images}")
 print("==========================================")
 print("=> Data directory is ", bytes_to_unit(
-    get_size(f"./{DATALAKE_DIR}"), "KB"))
+    get_size(f"{DATALAKE_DIR}"), "KB"))
 print("=> Image directory is ", bytes_to_unit(
     get_size(f"{DATALAKE_DIR}/images"), "MB"))
 print("=> Video directory is ", bytes_to_unit(
     get_size(f"{DATALAKE_DIR}/yt_videos"), "GB"))
 print("==========================================")
-print("Committing to github all the new changes >>>")
-print("==========================================")
-os.system("git add .")
-os.system(f'git commit -m "Update on {total_detals} cows"')
-os.system("git push origin main")
-print("==========================================")
+# print("Committing to github all the new changes >>>")
+# print("==========================================")
+# os.system("git add .")
+# os.system(f'git commit -m "Update on {total_detals} cows"')
+# os.system("git push origin main")
+# print("==========================================")
