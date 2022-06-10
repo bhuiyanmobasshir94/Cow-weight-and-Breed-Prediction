@@ -6,9 +6,6 @@ from datetime import datetime
 import joblib
 import requests
 
-import analytics
-import api_scraper_details
-import scrape_youtube2images
 from configs import *
 
 DATA_DICT_LIST = []
@@ -30,12 +27,13 @@ def download_image(img_url, img_name):
 
 
 def all_cattles():
-    url = "https://admin.bengalmeat.com/api/cattle/"
+    # url = "https://admin.bengalmeat.com/api/cattle/"
+    url = DATA_VENDOR_URL
     json_response = scrape(url)
     if json_response["status"] is True:
         data_count = json_response["data"]["count"] + 1
         for offset in range(0, data_count, 20):
-            url = f"https://admin.bengalmeat.com/api/cattle/?limit=20&offset={offset}"
+            url = f"{url}?limit=20&offset={offset}"
             json_response = scrape(url)
             DATA_DICT_LIST.extend(json_response["data"]["results"])
     assert (data_count - 1) == len(DATA_DICT_LIST)
@@ -57,12 +55,14 @@ def dump_images_dict():
         IMAGES_DICT[value["sku"]].append(value["thumbnail"])
         for slide in value["slides"]:
             IMAGES_DICT[value["sku"]].append(slide["image"])
+    logger.info("Downloaded images dict count => %s", len(IMAGES_DICT), exc_info=1)
     joblib.dump(IMAGES_DICT, f"{DATALAKE_DIR}/pickles/IMAGES_DICT_{ext}.pkl")
     logger.info("Dumped images dict")
 
 
 def download_images():
-    IMAGES_DICT = dict(IMAGES_DICT)
+    # IMAGES_DICT = dict(IMAGES_DICT)
+    IMAGES_DICT = joblib.load(f"{DATALAKE_DIR}/pickles/IMAGES_DICT_{ext}.pkl")
     for key, value in IMAGES_DICT.items():
         if os.path.exists(f"{DATALAKE_DIR}/images/{key}"):
             for index, img_url in enumerate(value):
@@ -102,9 +102,9 @@ def update_final_dict():
     IMAGES_DICT = joblib.load(f"{DATALAKE_DIR}/pickles/IMAGES_DICT_{ext}.pkl")
     logger.info("Loaded images dict")
 
-    if os.path.exists("{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl"):
+    if os.path.exists(f"{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl"):
         FINAL_DATA_DICT = joblib.load(
-            "{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl")
+            f"{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl")
         logger.info("Loaded final data dict")
     else:
         FINAL_DATA_DICT = defaultdict(dict)
@@ -113,7 +113,7 @@ def update_final_dict():
         value["images_list"] = IMAGES_DICT[value["sku"]]
         FINAL_DATA_DICT[value["sku"]] = dict(value)
 
-    joblib.dump(FINAL_DATA_DICT, "{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl")
+    joblib.dump(FINAL_DATA_DICT, f"{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl")
     logger.info("Dumped final data dict")
 
     logger.info("========================================")
@@ -138,3 +138,6 @@ if __name__ == "__main__":
     download_images()
     scrape_report()
     update_final_dict()
+    import api_scraper_details
+    import scrape_youtube2images
+    import analytics

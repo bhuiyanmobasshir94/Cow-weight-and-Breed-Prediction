@@ -1,5 +1,7 @@
-import os
 import glob
+import os
+
+from configs import *
 
 
 def get_size(start_path="."):
@@ -33,20 +35,20 @@ def bytes_to_unit(bytes, unit):
 
 total_yt_images = 0
 total_hd_images = 0
-for dirname, _, filenames in os.walk("yt_images"):
+for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/yt_images"):
     for filename in filenames:
         file_path = f"{dirname}\{filename}"
         if os.path.exists(file_path):
             total_yt_images += 1
 
-for dirname, _, filenames in os.walk("images"):
+for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/images"):
     for filename in filenames:
         file_path = f"{dirname}\{filename}"
         if os.path.exists(file_path):
             total_hd_images += 1
 
 total_images = total_yt_images + total_hd_images
-total_detals = len(glob.glob("details/*.pkl"))
+total_detals = len(glob.glob(f"{DATALAKE_DIR}/details/*.pkl"))
 
 print("==========================================")
 print(f"[INFO] total details collected => {total_detals}")
@@ -54,9 +56,12 @@ print(f"[INFO] total hd images collected => {total_hd_images}")
 print(f"[INFO] total youtube images collected => {total_yt_images}")
 print(f"[INFO] total images collected => {total_images}")
 print("==========================================")
-print("=> Data directory is ", bytes_to_unit(get_size("./data"), "KB"))
-print("=> Image directory is ", bytes_to_unit(get_size("./images"), "MB"))
-print("=> Video directory is ", bytes_to_unit(get_size("./yt_videos"), "GB"))
+print("=> Data directory is ", bytes_to_unit(
+    get_size(f"./{DATALAKE_DIR}"), "KB"))
+print("=> Image directory is ", bytes_to_unit(
+    get_size(f"{DATALAKE_DIR}/images"), "MB"))
+print("=> Video directory is ", bytes_to_unit(
+    get_size(f"{DATALAKE_DIR}/yt_videos"), "GB"))
 print("==========================================")
 print("Committing to github all the new changes >>>")
 print("==========================================")
@@ -64,4 +69,3 @@ os.system("git add .")
 os.system(f'git commit -m "Update on {total_detals} cows"')
 os.system("git push origin main")
 print("==========================================")
-

@@ -1,21 +1,25 @@
-import joblib
-import os
-import requests
-import json
 import concurrent.futures
+import json
+import os
 import time
 
-apply_tuple = lambda f: lambda args: f(*args)
+import joblib
+import requests
+
+from configs import *
+
+
+def apply_tuple(f): return lambda args: f(*args)
 
 
 def scrape_detail(id):
-    url = f"https://admin.bengalmeat.com/api/cattle/{str(id)}/detail"
+    url = f"{DATA_VENDOR_URL}{str(id)}/detail"
     response = requests.get(url).content
     json_response = json.loads(response)
     return json_response
 
 
-data_dict = dict(joblib.load("pickles/FINAL_DATA_DICT.pkl"))
+data_dict = dict(joblib.load(f"{DATALAKE_DIR}/pickles/FINAL_DATA_DICT.pkl"))
 
 id_sku_list = []
 for value in data_dict.values():
@@ -27,7 +31,7 @@ already_exists = 0
 
 @apply_tuple
 def download_detail(id, sku):
-    path = f"details/{sku}.pkl"
+    path = f"{DATALAKE_DIR}/details/{sku}.pkl"
     if os.path.exists(path):
         global already_exists
         already_exists += 1

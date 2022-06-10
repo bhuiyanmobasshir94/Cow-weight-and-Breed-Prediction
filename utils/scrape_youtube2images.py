@@ -1,21 +1,23 @@
-import pandas as pd
-import joblib
-import os
-import time
 import concurrent.futures
 import glob
-from tqdm import tqdm
-from pytube import YouTube
-import cv2
+import os
 import time
 
-details = glob.glob("details/*.pkl")
+import cv2
+import joblib
+import pandas as pd
+from pytube import YouTube
+from tqdm import tqdm
+
+from configs import *
+
+details = glob.glob(f"{DATALAKE_DIR}/details/*.pkl")
 data_list = []
 for i, pkl in tqdm(enumerate(details), total=len(details)):
     data = joblib.load(pkl)
     data_list.append(data)
 df = pd.DataFrame.from_dict(data_list, orient="columns")
-df.to_csv("data/pickles_to_df.csv", index=False)
+df.to_csv(f"{DATALAKE_DIR}/pickles_to_df.csv", index=False)
 df_sku_slug = df.loc[:, ["sku", "youtube_slug"]]
 
 sku_slug_list = []
@@ -25,19 +27,21 @@ for index, row in df_sku_slug.iterrows():
 existed = 0
 downloaded = 0
 
-apply_tuple = lambda f: lambda args: f(*args)
+
+def apply_tuple(f): return lambda args: f(*args)
 
 
 def sku2filename(sku):
     splitted_list = list(sku)
-    file_name = "".join(splitted_list[:3]) + " " + "".join(splitted_list[3:]) + ".mp4"
+    file_name = "".join(splitted_list[:3]) + \
+        " " + "".join(splitted_list[3:]) + ".mp4"
     return file_name
 
 
 @apply_tuple
 def yt2imgs(sku, slug):
     url = f"https://www.youtube.com/watch?v={slug}"
-    path = f"yt_videos/{sku}"
+    path = f"{DATALAKE_DIR}/yt_videos/{sku}"
     if not os.path.exists(path):
         os.mkdir(path)
     if len(os.listdir(path)) == 1 and os.listdir(path)[0] == sku2filename(sku):
@@ -73,10 +77,12 @@ print(f"Total existed => {existed}")
 print("========================================")
 
 yt_video_path_list = []
-for dirname, _, filenames in os.walk("yt_videos"):
+for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/yt_videos"):
+    print(dirname)
     for filename in filenames:
-        sku = dirname.split("\\")[1]
-        yt_video_path_list.append((sku, f"yt_videos/{sku}/{filename}"))
+        sku = dirname.split("/")[-1]
+        yt_video_path_list.append(
+            (sku, f"{DATALAKE_DIR}/yt_videos/{sku}/{filename}"))
 
 total_video_processed = 0
 
@@ -84,7 +90,7 @@ total_video_processed = 0
 @apply_tuple
 def video2images(sku, path, delay=0.4, min_image=25, max_image=30):
     cam = cv2.VideoCapture(path)
-    output_path = f"yt_images/{sku}"
+    output_path = f"{DATALAKE_DIR}/yt_images/{sku}"
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     if len(os.listdir(output_path)) > min_image:
@@ -99,7 +105,7 @@ def video2images(sku, path, delay=0.4, min_image=25, max_image=30):
             if currentframe == 0:
                 currentframe += 1
                 continue
-            image_path = f"yt_images/{sku}/{sku}_{count}.jpg"
+            image_path = f"{DATALAKE_DIR}/yt_images/{sku}/{sku}_{count}.jpg"
             cv2.imwrite(image_path, frame)
             if cv2.imread(image_path) is None:
                 os.remove(image_path)
