@@ -63,9 +63,14 @@ print("=> Image directory is ", bytes_to_unit(
 print("=> Video directory is ", bytes_to_unit(
     get_size(f"{DATALAKE_DIR}/yt_videos"), "GB"))
 print("==========================================")
-# print("Committing to github all the new changes >>>")
-# print("==========================================")
-# os.system("git add .")
-# os.system(f'git commit -m "Update on {total_detals} cows"')
-# os.system("git push origin main")
-# print("==========================================")
+
+import sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+print("Committing to github all the new changes >>>")
+print("==========================================")
+os.system("git add .")
+os.system(f'git commit -m "Update on {total_detals} cows"')
+os.system("git push origin main")
+print("==========================================")
