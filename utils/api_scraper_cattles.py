@@ -83,7 +83,7 @@ def scrape_report():
     for dirname, _, filenames in os.walk(f"{DATALAKE_DIR}/images"):
         # print(dirname)
         # print(filenames)
-        if os.path.exists(dirname) and dirname is not "images":
+        if os.path.exists(dirname) and dirname != "images":
             dir_count += 1
         for filename in filenames:
             if os.path.exists(os.path.join(dirname, filename)):
