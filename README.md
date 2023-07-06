@@ -47,3 +47,4 @@ https://admin.bengalmeat.com/api/cattle/
 ```
 https://admin.bengalmeat.com/api/cattle/{{CATTLE_ID}}/detail
 ```
+N.B: All the scraped images and data are from Bengalmeat's public-facing website.
