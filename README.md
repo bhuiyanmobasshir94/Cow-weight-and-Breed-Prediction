@@ -41,6 +41,7 @@
 2. [Stackoverflow thread](https://stackoverflow.com/a/25421946/7195890)
 
 ## Bengalmeat public API
+Please take you permissions from the proper authority before using this
 ```
 https://admin.bengalmeat.com/api/cattle/
 ```
