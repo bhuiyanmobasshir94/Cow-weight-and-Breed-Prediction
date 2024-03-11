@@ -20,6 +20,6 @@ for dir in dataset_dirs:
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
 
-print("Total Data Count => ", TOTAL_DATA_COUNT)
-print("Total HD Images => ", HD_IMAGES_COUNT)
-print("Total Youtube Videos Count => ", YOUTUBE_VIDEOS_COUNT)
+print("Total Cow Data Count => ", TOTAL_DATA_COUNT)
+print("Total Cow HD Images => ", HD_IMAGES_COUNT)
+print("Total Cow Youtube Videos Count => ", YOUTUBE_VIDEOS_COUNT)
