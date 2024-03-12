@@ -26,17 +26,16 @@ IMAGES_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("IMAGES_DIR", "images"))
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 PICKLES_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("PICKLES_DIR", "pickles"))
 PICKLES_DIR.mkdir(parents=True, exist_ok=True)
-YT_IMAGES_DIR = Path(BASE_DIR, DATALAKE_DIR,
-                     os.getenv("YT_IMAGES_DIR", "yt_images"))
+YT_IMAGES_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("YT_IMAGES_DIR", "yt_images"))
 YT_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-YT_VIDEOS_DIR = Path(BASE_DIR, DATALAKE_DIR,
-                     os.getenv("YT_VIDEOS_DIR", "yt_videos"))
+YT_VIDEOS_DIR = Path(BASE_DIR, DATALAKE_DIR, os.getenv("YT_VIDEOS_DIR", "yt_videos"))
 YT_VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
 DATASET_URL = os.getenv("DATASET_URL", None)
 IMAGES_URL = os.getenv("IMAGES_URL", None)
 YT_IMAGES_URL = os.getenv("YT_IMAGES_URL", None)
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", None)
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", None)
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME", None)
 DATASET_NAME = os.getenv("DATASET_NAME", "dataset.csv")
 DATASET_FILE_PATH = Path(DATALAKE_DIR, DATASET_NAME)
 
@@ -49,12 +48,16 @@ console_handler = RichHandler(markup=True)
 console_handler.setLevel(logging.DEBUG)
 info_handler = logging.handlers.RotatingFileHandler(
     # 1 MB
-    filename=Path(LOGS_DIR, "info.log"), maxBytes=10485760, backupCount=10,
+    filename=Path(LOGS_DIR, "info.log"),
+    maxBytes=10485760,
+    backupCount=10,
 )
 info_handler.setLevel(logging.INFO)
 error_handler = logging.handlers.RotatingFileHandler(
     # 1 MB
-    filename=Path(LOGS_DIR, "error.log"), maxBytes=10485760, backupCount=10,
+    filename=Path(LOGS_DIR, "error.log"),
+    maxBytes=10485760,
+    backupCount=10,
 )
 error_handler.setLevel(logging.ERROR)
 
