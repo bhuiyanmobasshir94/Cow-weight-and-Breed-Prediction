@@ -26,13 +26,13 @@ for dir in dataset_dirs:
         for img in images:
             data = open(img, "rb")
             name = img.split("/")[-1]
-            s3.put_object_to_s3(data, S3_BUCKET_NAME, f"images/{sku}", name)
+            # s3.put_object_to_s3(data, S3_BUCKET_NAME, f"images/{sku}", name)
         HD_IMAGES_COUNT += len(images)
         videos = glob.glob(f"{yearly_dir}/yt_videos/{sku}/*.mp4")
         for video in videos:
             data = open(video, "rb")
             name = video.split("/")[-1]
-            s3.put_object_to_s3(data, S3_BUCKET_NAME, f"videos/{sku}", name)
+            # s3.put_object_to_s3(data, S3_BUCKET_NAME, f"videos/{sku}", name)
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
