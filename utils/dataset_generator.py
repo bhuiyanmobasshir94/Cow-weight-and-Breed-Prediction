@@ -47,47 +47,47 @@ for dir in dataset_dirs:
         # print(f"Loading percentage ", index + 1 / len(df_csv), "%")
         sku = row["sku"]
         images = glob.glob(f"{yearly_dir}/images/{sku}/*.jpg")
-        run_command(
-            command=[
-                "aws",
-                "s3",
-                "cp",
-                "--recursive",
-                f"{yearly_dir}/images/{sku}",
-                f"s3://{S3_BUCKET_NAME}/images/{sku}",
-            ]
-        )
+        # run_command(
+        #     command=[
+        #         "aws",
+        #         "s3",
+        #         "cp",
+        #         "--recursive",
+        #         f"{yearly_dir}/images/{sku}",
+        #         f"s3://{S3_BUCKET_NAME}/images/{sku}",
+        #     ]
+        # )
         # for img in images:
         #     name = img.split("/")[-1]
         #     s3.Bucket(S3_BUCKET_NAME).upload_file(img, f"images/{sku}/{name}")
         HD_IMAGES_COUNT += len(images)
         videos = glob.glob(f"{yearly_dir}/yt_videos/{sku}/*.mp4")
-        run_command(
-            command=[
-                "aws",
-                "s3",
-                "cp",
-                "--recursive",
-                f"{yearly_dir}/yt_videos/{sku}",
-                f"s3://{S3_BUCKET_NAME}/videos/{sku}",
-            ]
-        )
+        # run_command(
+        #     command=[
+        #         "aws",
+        #         "s3",
+        #         "cp",
+        #         "--recursive",
+        #         f"{yearly_dir}/yt_videos/{sku}",
+        #         f"s3://{S3_BUCKET_NAME}/videos/{sku}",
+        #     ]
+        # )
         # for video in videos:
         #     name = video.split("/")[-1]
         #     s3.Bucket(S3_BUCKET_NAME).upload_file(video, f"videos/{sku}/{name}")
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
-run_command(
-    command=[
-        "aws",
-        "s3",
-        "cp",
-        "--recursive",
-        f"{BASE_DIR}/cow_dataset.csv",
-        f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
-    ]
-)
+# run_command(
+#     command=[
+#         "aws",
+#         "s3",
+#         "cp",
+#         "--recursive",
+#         f"{BASE_DIR}/cow_dataset.csv",
+#         f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
+#     ]
+# )
 # s3.Bucket(S3_BUCKET_NAME).upload_file(
 #     f"{BASE_DIR}/cow_dataset.csv", f"data/cow_dataset_{TOTAL_DATA_COUNT}.csv"
 # )
