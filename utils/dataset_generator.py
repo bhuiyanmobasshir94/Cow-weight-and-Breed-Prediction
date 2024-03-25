@@ -91,8 +91,8 @@ DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
 # s3.Bucket(S3_BUCKET_NAME).upload_file(
 #     f"{BASE_DIR}/cow_dataset.csv", f"data/cow_dataset_{TOTAL_DATA_COUNT}.csv"
 # )
-
-print("Total Cow Data Count => ", TOTAL_DATA_COUNT)
-print("Total Cow HD Images => ", HD_IMAGES_COUNT)
-print("Total Cow Youtube Videos Count => ", YOUTUBE_VIDEOS_COUNT)
-print("Final Cow Data Count => ", len(DF))
+with open(f"{BASE_DIR}/note.txt", "w") as file:
+    file.writelines(f"Total Cow Data Count => {TOTAL_DATA_COUNT} \n")
+    file.writelines(f"Total Cow HD Images => {HD_IMAGES_COUNT} \n")
+    file.writelines(f"Total Cow Youtube Videos Count => {YOUTUBE_VIDEOS_COUNT} \n")
+    file.writelines(f"Final Cow Data Count => {len(DF)} \n")
