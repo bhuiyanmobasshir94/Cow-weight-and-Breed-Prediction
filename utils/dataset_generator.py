@@ -29,6 +29,22 @@ def run_command(command=["ls", "-l"]):
         print(result.stderr)
 
 
+import os
+
+
+def rename_folders(root_dir):
+    for root, dirs, files in os.walk(root_dir, topdown=False):
+        for name in dirs:
+            current_dir = os.path.join(root, name)
+            new_name = name.replace(
+                " ", ""
+            )  # Replace "old_string" with the string you want to replace and "new_string" with the new string
+            if name != new_name:
+                new_dir = os.path.join(root, new_name)
+                os.rename(current_dir, new_dir)
+                print(f"Renamed directory: {current_dir} -> {new_dir}")
+
+
 dataset_dirs = ["data-2021", "data-2022", "data-2023"]
 HD_IMAGES_COUNT = 0
 YOUTUBE_VIDEOS_COUNT = 0
@@ -37,7 +53,10 @@ DF = None
 
 for dir in dataset_dirs:
     yearly_dir = BASE_DIR + "/" + dir
+    rename_folders(f"{yearly_dir}/images/")
+    rename_folders(f"{yearly_dir}/yt_videos/")
     df_csv = pd.read_csv(os.path.join(yearly_dir, "pickles_to_df.csv"))
+    df_csv["sku"] = df_csv["sku"].str.replace(" ", "")
     if DF is not None:
         DF = pd.concat([DF, df_csv], axis=0)
     else:
@@ -77,7 +96,7 @@ for dir in dataset_dirs:
         #     s3.Bucket(S3_BUCKET_NAME).upload_file(video, f"videos/{sku}/{name}")
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
-DF["sku"] = DF["sku"].str.replace(" ", "")
+# DF["sku"] = DF["sku"].str.replace(" ", "")
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
 # run_command(
 #     command=[
