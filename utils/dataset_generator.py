@@ -77,6 +77,7 @@ for dir in dataset_dirs:
         #     s3.Bucket(S3_BUCKET_NAME).upload_file(video, f"videos/{sku}/{name}")
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
+DF["sku"] = DF["sku"].str.replace(" ", "")
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
 # run_command(
 #     command=[
