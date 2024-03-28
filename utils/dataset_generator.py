@@ -84,16 +84,16 @@ for dir in dataset_dirs:
             count = match.group(1)
             if len(images) != int(count):
                 print(f"Folder has {len(images)}, found {count} for {sku}")
-                # run_command(
-                #     command=[
-                #         "aws",
-                #         "s3",
-                #         "cp",
-                #         "--recursive",
-                #         f"{yearly_dir}/images/{sku}",
-                #         f"s3://{S3_BUCKET_NAME}/images/{sku}",
-                #     ]
-                # )
+                run_command(
+                    command=[
+                        "aws",
+                        "s3",
+                        "cp",
+                        "--recursive",
+                        f"{yearly_dir}/images/{sku}",
+                        f"s3://{S3_BUCKET_NAME}/images/{sku}",
+                    ]
+                )
         HD_IMAGES_COUNT += len(images)
         videos = glob.glob(f"{yearly_dir}/yt_videos/{sku}/*.mp4")
         result = run_command(
@@ -112,40 +112,40 @@ for dir in dataset_dirs:
             count = match.group(1)
             if len(videos) != int(count):
                 print(f"Folder has {len(videos)}, found {count} for {sku}")
-                # run_command(
-                #     command=[
-                #         "aws",
-                #         "s3",
-                #         "cp",
-                #         "--recursive",
-                #         f"{yearly_dir}/yt_videos/{sku}",
-                #         f"s3://{S3_BUCKET_NAME}/videos/{sku}",
-                #     ]
-                # )
+                run_command(
+                    command=[
+                        "aws",
+                        "s3",
+                        "cp",
+                        "--recursive",
+                        f"{yearly_dir}/yt_videos/{sku}",
+                        f"s3://{S3_BUCKET_NAME}/videos/{sku}",
+                    ]
+                )
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
-# run_command(
-#     command=[
-#         "aws",
-#         "s3",
-#         "cp",
-#         f"{BASE_DIR}/cow_dataset.csv",
-#         f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
-#     ]
-# )
+run_command(
+    command=[
+        "aws",
+        "s3",
+        "cp",
+        f"{BASE_DIR}/cow_dataset.csv",
+        f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
+    ]
+)
 with open(f"{BASE_DIR}/note.txt", "w") as file:
     file.writelines(f"Total Cow Data Count => {TOTAL_DATA_COUNT} \n")
     file.writelines(f"Total Cow HD Images => {HD_IMAGES_COUNT} \n")
     file.writelines(f"Total Cow Youtube Videos Count => {YOUTUBE_VIDEOS_COUNT} \n")
     file.writelines(f"Final Cow Data Count => {len(DF)} \n")
 
-# run_command(
-#     command=[
-#         "aws",
-#         "s3",
-#         "cp",
-#         f"{BASE_DIR}/note.txt",
-#         f"s3://{S3_BUCKET_NAME}/data/note.txt",
-#     ]
-# )
+run_command(
+    command=[
+        "aws",
+        "s3",
+        "cp",
+        f"{BASE_DIR}/note.txt",
+        f"s3://{S3_BUCKET_NAME}/data/note.txt",
+    ]
+)
