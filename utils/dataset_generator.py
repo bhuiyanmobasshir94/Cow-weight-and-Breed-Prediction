@@ -3,6 +3,7 @@ from utils.aws_wrappers import *
 import pandas as pd
 import glob
 import boto3
+import re
 
 s3 = boto3.resource(
     "s3",
@@ -20,13 +21,15 @@ def run_command(command=["ls", "-l"]):
     )
 
     # Check if the command was successful
-    if result.returncode == 0:
-        print("Command executed successfully")
-        print("Output:")
-        print(result.stdout)
-    else:
-        print("Error executing command:")
-        print(result.stderr)
+    # if result.returncode == 0:
+    #     print("Command executed successfully")
+    #     print("Output:")
+    #     print(result.stdout)
+    # else:
+    #     print("Error executing command:")
+    #     print(result.stderr)
+
+    return result
 
 
 import os
@@ -63,53 +66,73 @@ for dir in dataset_dirs:
         DF = df_csv
     TOTAL_DATA_COUNT += len(df_csv)
     for index, row in df_csv.iterrows():
-        # print(f"Loading percentage ", index + 1 / len(df_csv), "%")
         sku = row["sku"]
         images = glob.glob(f"{yearly_dir}/images/{sku}/*.jpg")
-        run_command(
+        result = run_command(
             command=[
                 "aws",
                 "s3",
-                "cp",
-                "--recursive",
-                f"{yearly_dir}/images/{sku}",
-                f"s3://{S3_BUCKET_NAME}/images/{sku}",
+                "ls",
+                f"s3://{S3_BUCKET_NAME}/images/{sku}/",
+                "--human-readable",
+                "--summarize",
             ]
         )
-        # for img in images:
-        #     name = img.split("/")[-1]
-        #     s3.Bucket(S3_BUCKET_NAME).upload_file(img, f"images/{sku}/{name}")
+        pattern = r"Total Objects: (\d+)"
+        match = re.search(pattern, result.stdout)
+        if match:
+            count = match.group(1)
+            if len(images) != int(count):
+                print(f"Folder has {len(images)}, found {count} for {sku}")
+                # run_command(
+                #     command=[
+                #         "aws",
+                #         "s3",
+                #         "cp",
+                #         "--recursive",
+                #         f"{yearly_dir}/images/{sku}",
+                #         f"s3://{S3_BUCKET_NAME}/images/{sku}",
+                #     ]
+                # )
         HD_IMAGES_COUNT += len(images)
         videos = glob.glob(f"{yearly_dir}/yt_videos/{sku}/*.mp4")
-        run_command(
+        result = run_command(
             command=[
                 "aws",
                 "s3",
-                "cp",
-                "--recursive",
-                f"{yearly_dir}/yt_videos/{sku}",
-                f"s3://{S3_BUCKET_NAME}/videos/{sku}",
+                "ls",
+                f"s3://{S3_BUCKET_NAME}/videos/{sku}/",
+                "--human-readable",
+                "--summarize",
             ]
         )
-        # for video in videos:
-        #     name = video.split("/")[-1]
-        #     s3.Bucket(S3_BUCKET_NAME).upload_file(video, f"videos/{sku}/{name}")
+        pattern = r"Total Objects: (\d+)"
+        match = re.search(pattern, result.stdout)
+        if match:
+            count = match.group(1)
+            if len(videos) != int(count):
+                print(f"Folder has {len(videos)}, found {count} for {sku}")
+                # run_command(
+                #     command=[
+                #         "aws",
+                #         "s3",
+                #         "cp",
+                #         "--recursive",
+                #         f"{yearly_dir}/yt_videos/{sku}",
+                #         f"s3://{S3_BUCKET_NAME}/videos/{sku}",
+                #     ]
+                # )
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
-# DF["sku"] = DF["sku"].str.replace(" ", "")
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
-run_command(
-    command=[
-        "aws",
-        "s3",
-        "cp",
-        "--recursive",
-        f"{BASE_DIR}/cow_dataset.csv",
-        f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
-    ]
-)
-# s3.Bucket(S3_BUCKET_NAME).upload_file(
-#     f"{BASE_DIR}/cow_dataset.csv", f"data/cow_dataset_{TOTAL_DATA_COUNT}.csv"
+# run_command(
+#     command=[
+#         "aws",
+#         "s3",
+#         "cp",
+#         f"{BASE_DIR}/cow_dataset.csv",
+#         f"s3://{S3_BUCKET_NAME}/data/cow_dataset_{TOTAL_DATA_COUNT}.csv",
+#     ]
 # )
 with open(f"{BASE_DIR}/note.txt", "w") as file:
     file.writelines(f"Total Cow Data Count => {TOTAL_DATA_COUNT} \n")
@@ -117,13 +140,12 @@ with open(f"{BASE_DIR}/note.txt", "w") as file:
     file.writelines(f"Total Cow Youtube Videos Count => {YOUTUBE_VIDEOS_COUNT} \n")
     file.writelines(f"Final Cow Data Count => {len(DF)} \n")
 
-run_command(
-    command=[
-        "aws",
-        "s3",
-        "cp",
-        "--recursive",
-        f"{BASE_DIR}/note.txt",
-        f"s3://{S3_BUCKET_NAME}/data/note.txt",
-    ]
-)
+# run_command(
+#     command=[
+#         "aws",
+#         "s3",
+#         "cp",
+#         f"{BASE_DIR}/note.txt",
+#         f"s3://{S3_BUCKET_NAME}/data/note.txt",
+#     ]
+# )
