@@ -1,12 +1,16 @@
 # Cow-weight-and-Breed-Prediction
+
 ## Overleaf
+
 1. [Draft](https://www.overleaf.com/read/pvdhwqhqptfm)
 
 ## Plans
+
 1. [Session 4](https://github.com/bhuiyanmobasshir94/NUS-Artificial-Intelligence-Training/tree/main/Sessions/SESSION_4)
 2. [Session 5](https://github.com/bhuiyanmobasshir94/NUS-Artificial-Intelligence-Training/tree/main/Sessions/SESSION_5)
 
-## Scraper With Puppeteer 
+## Scraper With Puppeteer
+
 1. [A Guide to Web Scraping With JavaScript and Node.js](https://hackernoon.com/a-guide-to-web-scraping-with-javascript-and-nodejs-i21l3te1)
 2. [puppeteer](https://github.com/puppeteer/puppeteer)
 3. [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster)
@@ -14,10 +18,12 @@
 5. [Saving and scraping a website with Puppeteer](https://fettblog.eu/scraping-with-puppeteer/)
 
 ## SQLite with SQLAlchemy
+
 1. [Storing a Python dict as JSON in SQLite using SQLAlchemy](https://blog.stigok.com/2020/09/06/sqlalchemy-sqlite-json-column-field.html)
 2. [Data Management With Python, SQLite, and SQLAlchemy](https://realpython.com/python-sqlite-sqlalchemy/)
 
 ## Video Classification Resources
+
 1. [How to use the Keras Functional API for Deep Learning](https://machinelearningmastery.com/keras-functional-api-deep-learning/)
 2. [Multi-input Multi-output Model with Keras Functional API](https://stackoverflow.com/questions/66845924/multi-input-multi-output-model-with-keras-functional-api)
 3. [Video classification with Keras and Deep Learning - PyImageSearch](https://www.pyimagesearch.com/2019/07/15/video-classification-with-keras-and-deep-learning/)
@@ -30,22 +36,36 @@
 10. [Deep Learning for Tabular Data using PyTorch](https://towardsdatascience.com/deep-learning-for-tabular-data-using-pytorch-1807f2858320)
 
 ## Video data loading
+
 1. [Video-Dataset-Loading-Pytorch](https://github.com/RaivoKoot/Video-Dataset-Loading-Pytorch)
 
 ## Dataset Publish Ideas
+
 1. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.mdpi.com%2Fjournal%2Fdata)
 2. [~](https://www.researchgate.net/deref/https%3A%2F%2Fwww.journals.elsevier.com%2Fdata-in-brief)
 
 ## Curated List
+
 1. [Write your own Custom Data Generator for TensorFlow Keras](https://medium.com/analytics-vidhya/write-your-own-custom-data-generator-for-tensorflow-keras-1252b64e41c3)
 2. [Stackoverflow thread](https://stackoverflow.com/a/25421946/7195890)
 
 ## Bengalmeat public API
+
 Please take you permissions from the proper authority before using this
+
 ```
 https://admin.bengalmeat.com/api/cattle/
 ```
+
 ```
 https://admin.bengalmeat.com/api/cattle/{{CATTLE_ID}}/detail
 ```
+
 N.B: All the scraped images and data are from Bengalmeat's public-facing website.
+
+## AWS Query
+
+```
+aws s3 ls --recursive s3://{AWS_BUCKET_NAME}/images/ --human-readable --summarize
+aws s3 ls --recursive s3://{AWS_BUCKET_NAME}/videos/ --human-readable --summarize
+```
