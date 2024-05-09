@@ -71,61 +71,61 @@ for dir in dataset_dirs:
         sku = row["sku"]
         images = glob.glob(f"{yearly_dir}/images/{sku}/*.jpg")
         DF.loc[DF["sku"] == sku, "images_count"] = len(images)
-        # result = run_command(
-        #     command=[
-        #         "aws",
-        #         "s3",
-        #         "ls",
-        #         f"s3://{S3_BUCKET_NAME}/images/{sku}/",
-        #         "--human-readable",
-        #         "--summarize",
-        #     ]
-        # )
-        # pattern = r"Total Objects: (\d+)"
-        # match = re.search(pattern, result.stdout)
-        # if match:
-        #     count = match.group(1)
-        #     if len(images) != int(count):
-        #         print(f"Folder has {len(images)}, found {count} for {sku}")
-        #         run_command(
-        #             command=[
-        #                 "aws",
-        #                 "s3",
-        #                 "cp",
-        #                 "--recursive",
-        #                 f"{yearly_dir}/images/{sku}",
-        #                 f"s3://{S3_BUCKET_NAME}/images/{sku}",
-        #             ]
-        #         )
+        result = run_command(
+            command=[
+                "aws",
+                "s3",
+                "ls",
+                f"s3://{S3_BUCKET_NAME}/images/{sku}/",
+                "--human-readable",
+                "--summarize",
+            ]
+        )
+        pattern = r"Total Objects: (\d+)"
+        match = re.search(pattern, result.stdout)
+        if match:
+            count = match.group(1)
+            if len(images) != int(count):
+                print(f"Folder has {len(images)}, found {count} for {sku}")
+                run_command(
+                    command=[
+                        "aws",
+                        "s3",
+                        "cp",
+                        "--recursive",
+                        f"{yearly_dir}/images/{sku}",
+                        f"s3://{S3_BUCKET_NAME}/images/{sku}",
+                    ]
+                )
         HD_IMAGES_COUNT += len(images)
         videos = glob.glob(f"{yearly_dir}/yt_videos/{sku}/*.mp4")
         DF.loc[DF["sku"] == sku, "yt_videos_count"] = len(videos)
-        # result = run_command(
-        #     command=[
-        #         "aws",
-        #         "s3",
-        #         "ls",
-        #         f"s3://{S3_BUCKET_NAME}/videos/{sku}/",
-        #         "--human-readable",
-        #         "--summarize",
-        #     ]
-        # )
-        # pattern = r"Total Objects: (\d+)"
-        # match = re.search(pattern, result.stdout)
-        # if match:
-        #     count = match.group(1)
-        #     if len(videos) != int(count):
-        #         print(f"Folder has {len(videos)}, found {count} for {sku}")
-        #         run_command(
-        #             command=[
-        #                 "aws",
-        #                 "s3",
-        #                 "cp",
-        #                 "--recursive",
-        #                 f"{yearly_dir}/yt_videos/{sku}",
-        #                 f"s3://{S3_BUCKET_NAME}/videos/{sku}",
-        #             ]
-        #         )
+        result = run_command(
+            command=[
+                "aws",
+                "s3",
+                "ls",
+                f"s3://{S3_BUCKET_NAME}/videos/{sku}/",
+                "--human-readable",
+                "--summarize",
+            ]
+        )
+        pattern = r"Total Objects: (\d+)"
+        match = re.search(pattern, result.stdout)
+        if match:
+            count = match.group(1)
+            if len(videos) != int(count):
+                print(f"Folder has {len(videos)}, found {count} for {sku}")
+                run_command(
+                    command=[
+                        "aws",
+                        "s3",
+                        "cp",
+                        "--recursive",
+                        f"{yearly_dir}/yt_videos/{sku}",
+                        f"s3://{S3_BUCKET_NAME}/videos/{sku}",
+                    ]
+                )
         YOUTUBE_VIDEOS_COUNT += len(videos)
 
 DF.to_csv(f"{BASE_DIR}/cow_dataset.csv", index=False)
