@@ -47,7 +47,7 @@ def rename_folders(root_dir):
                 print(f"Renamed directory: {current_dir} -> {new_dir}")
 
 
-dataset_dirs = ["data-2021", "data-2022", "data-2023"]
+dataset_dirs = ["data-2021", "data-2022", "data-2023", "data-2024"]
 HD_IMAGES_COUNT = 0
 YOUTUBE_VIDEOS_COUNT = 0
 TOTAL_DATA_COUNT = 0
