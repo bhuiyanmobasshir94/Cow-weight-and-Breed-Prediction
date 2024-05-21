@@ -43,8 +43,15 @@ def rename_folders(root_dir):
             )  # Replace "old_string" with the string you want to replace and "new_string" with the new string
             if name != new_name:
                 new_dir = os.path.join(root, new_name)
-                os.rename(current_dir, new_dir)
-                print(f"Renamed directory: {current_dir} -> {new_dir}")
+                try:
+                    os.rename(current_dir, new_dir)
+                    print(f"Renamed directory: {current_dir} -> {new_dir}")
+                except FileNotFoundError:
+                    print(f"Error: The folder {current_dir} does not exist.")
+                except PermissionError:
+                    print(f"Error: Permission denied. Cannot rename {current_dir}.")
+                except OSError as e:
+                    print(f"Error: {e}")
 
 
 dataset_dirs = ["data-2021", "data-2022", "data-2023", "data-2024"]
