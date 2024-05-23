@@ -47,11 +47,13 @@ def rename_folders(root_dir):
                     os.rename(current_dir, new_dir)
                     print(f"Renamed directory: {current_dir} -> {new_dir}")
                 except FileNotFoundError:
-                    print(f"Error: The folder {current_dir} does not exist.")
+                    logger.error(f"Error: The folder {current_dir} does not exist.")
                 except PermissionError:
-                    print(f"Error: Permission denied. Cannot rename {current_dir}.")
+                    logger.error(
+                        f"Error: Permission denied. Cannot rename {current_dir}."
+                    )
                 except OSError as e:
-                    print(f"Error: {e}")
+                    logger.error(f"Error: {e}")
 
 
 dataset_dirs = ["data-2021", "data-2022", "data-2023", "data-2024"]
