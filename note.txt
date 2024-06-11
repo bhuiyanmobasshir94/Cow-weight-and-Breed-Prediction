@@ -1,4 +1,4 @@
-Total Cow Data Count => 1913 
-Total Cow HD Images => 7652 
-Total Cow Youtube Videos Count => 1882 
-Final Cow Data Count => 1913 
+Total Cow Data Count => 1915 
+Total Cow HD Images => 7660 
+Total Cow Youtube Videos Count => 1884 
+Final Cow Data Count => 1915 
