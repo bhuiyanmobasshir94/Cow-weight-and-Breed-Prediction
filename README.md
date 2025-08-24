@@ -69,3 +69,47 @@ N.B: All the scraped images and data are from Bengalmeat's public-facing website
 aws s3 ls --recursive s3://{AWS_BUCKET_NAME}/images/ --human-readable --summarize
 aws s3 ls --recursive s3://{AWS_BUCKET_NAME}/videos/ --human-readable --summarize
 ```
+
+## AWS S3 Sync notes
+
+Command:
+AWS_PROFILE=cli-algorec ./s3_transfer_optimized.sh -b cid-mbs -p cow-data -t 15 &
+
+Explanation:
+This command runs the s3_transfer_optimized.sh script to sync files to the S3 bucket named 'cid-mbs' from the local directory 'cow-data'. The '-t 15' option sets the number of parallel threads to 15 for faster uploads. The '&' at the end runs the command in the background, allowing you to continue using the terminal.
+
+Important Notes:
+
+```
+  1. Ensure AWS CLI is configured with the profile 'cli-algorec'.
+  2. The script uses 'aws s3 sync' which only uploads new or changed files.
+  3. Monitor progress with 'tail -f transfer.log' if using nohup.
+```
+
+Existing Files:
+No, it won't re-upload existing files! AWS S3 sync is smart - it only uploads files that don't exist or have changed. It compares file sizes and modification times.
+
+    Sleep Mode Issue: Running with & won't survive sleep mode on macOS. The process will pause when your Mac sleeps.
+
+    Better Solutions:
+
+    Option 1: Prevent sleep during transfer:
+    # Keep Mac awake during transfer
+    caffeinate -s AWS_PROFILE=cli-algorec ./s3_transfer_optimized.sh -b cid-mbs -p cow-data -t 15
+
+    Option 2: Use nohup for background resilience:
+    # Run in background, immune to hangups
+    nohup AWS_PROFILE=cli-algorec ./s3_transfer_optimized.sh -b cid-mbs -p cow-data -t 15 > transfer.log 2>&1 &
+
+    # Check progress anytime with:
+    tail -f transfer.log
+
+    Option 3: Use tmux/screen (best for long transfers):
+    # Install tmux if needed: brew install tmux
+    tmux new-session -d -s s3transfer
+    tmux send-keys -t s3transfer 'AWS_PROFILE=cli-algorec ./s3_transfer_optimized.sh -b cid-mbs -p cow-data -t 15' Enter
+
+    # Detach and let it run: Ctrl+B, then D
+    # Reattach anytime: tmux attach -t s3transfer
+
+    Recommendation: Use caffeinate for simplest approach, or tmux if you want to detach/reattach to monitor progress.
