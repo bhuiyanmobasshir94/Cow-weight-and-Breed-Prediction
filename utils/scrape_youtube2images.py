@@ -70,8 +70,8 @@ def yt2imgs(sku, slug):
         # tv_embedded client works without PO tokens; web_safari as fallback.
         # iOS/web clients require PO tokens or a JS runtime for n-challenge.
         "extractor_args": {"youtube": {"player_client": ["tv_embedded", "web_safari"]}},
-        # Use Safari cookies on macOS to authenticate and bypass restrictions
-        "cookiesfrombrowser": ("safari",),
+        # Use cookies.txt if available (export via browser extension if needed)
+        **({"cookiefile": "../cookies.txt"} if os.path.exists("../cookies.txt") else {}),
         "progress_hooks": [
             lambda d: (
                 print(f"\rDownloading: {d['_percent_str']}", end="")
