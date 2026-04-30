@@ -14,4 +14,4 @@ dependencies:
   - nodejs
   - pip
   - pip:
-    - yt-dlp
+    - yt-dlp>=2026.3.17
