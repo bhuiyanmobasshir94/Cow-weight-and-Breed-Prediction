@@ -1,0 +1,16 @@
+name: cow-prediction
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - joblib=1.1.0
+  - pandas=1.3.5
+  - python-dotenv=0.19.2
+  - requests=2.26.0
+  - rich=10.16.1
+  - tqdm
+  - opencv
+  - pip
+  - pip:
+    - yt-dlp
