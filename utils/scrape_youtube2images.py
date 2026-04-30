@@ -61,12 +61,14 @@ def yt2imgs(sku, slug):
 
     # Configure yt-dlp options
     ydl_opts = {
-        "format": "best[ext=mp4]",  # Get the best mp4 format
+        "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
         "outtmpl": output_file,  # Output file path
         "quiet": False,  # Show progress
         "no_warnings": False,  # Show warnings
         "ignoreerrors": True,  # Continue on error
         "no_color": True,  # No colors in output
+        # Use iOS client to bypass SABR streaming 403s (yt-dlp issue #12482)
+        "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
         "progress_hooks": [
             lambda d: (
                 print(f"\rDownloading: {d['_percent_str']}", end="")
