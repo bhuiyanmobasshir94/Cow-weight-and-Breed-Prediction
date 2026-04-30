@@ -11,6 +11,7 @@ dependencies:
   - rich=10.16.1
   - tqdm
   - opencv
+  - nodejs
   - pip
   - pip:
     - yt-dlp
