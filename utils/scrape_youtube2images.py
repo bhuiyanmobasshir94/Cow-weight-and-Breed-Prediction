@@ -67,8 +67,8 @@ def yt2imgs(sku, slug):
         "no_warnings": False,  # Show warnings
         "ignoreerrors": True,  # Continue on error
         "no_color": True,  # No colors in output
-        # mweb doesn't require PO tokens; web as fallback with Node.js for n-challenge.
-        "extractor_args": {"youtube": {"player_client": ["mweb", "web"]}},
+        # web client respects cookies and doesn't need PO tokens when authenticated.
+        "extractor_args": {"youtube": {"player_client": ["web"]}},
         # Use cookies.txt if available (export via browser extension if needed)
         **({"cookiefile": "../cookies.txt"} if os.path.exists("../cookies.txt") else {}),
         "progress_hooks": [
