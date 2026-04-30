@@ -67,8 +67,11 @@ def yt2imgs(sku, slug):
         "no_warnings": False,  # Show warnings
         "ignoreerrors": True,  # Continue on error
         "no_color": True,  # No colors in output
-        # Use iOS client to bypass SABR streaming 403s (yt-dlp issue #12482)
-        "extractor_args": {"youtube": {"player_client": ["ios", "web"]}},
+        # tv_embedded client works without PO tokens; web_safari as fallback.
+        # iOS/web clients require PO tokens or a JS runtime for n-challenge.
+        "extractor_args": {"youtube": {"player_client": ["tv_embedded", "web_safari"]}},
+        # Use Safari cookies on macOS to authenticate and bypass restrictions
+        "cookiesfrombrowser": ("safari",),
         "progress_hooks": [
             lambda d: (
                 print(f"\rDownloading: {d['_percent_str']}", end="")
