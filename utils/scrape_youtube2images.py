@@ -57,7 +57,7 @@ def yt2imgs(sku, slug):
         global existed
         existed += 1
         print(f"Video for {sku} already exists at {output_file}")
-        return None
+        return True  # Already exists counts as success
 
     # Configure yt-dlp options
     ydl_opts = {
