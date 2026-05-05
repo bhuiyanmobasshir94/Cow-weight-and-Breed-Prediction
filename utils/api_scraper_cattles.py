@@ -33,8 +33,8 @@ def all_cattles():
     if json_response["status"] is True:
         data_count = json_response["data"]["count"] + 1
         for offset in range(0, data_count, 20):
-            url = f"{url}?limit=20&offset={offset}"
-            json_response = scrape(url)
+            page_url = f"{url}?limit=20&offset={offset}"
+            json_response = scrape(page_url)
             DATA_DICT_LIST.extend(json_response["data"]["results"])
     assert (data_count - 1) == len(DATA_DICT_LIST)
     logger.info("========================================")
