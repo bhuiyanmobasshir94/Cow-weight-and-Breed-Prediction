@@ -67,7 +67,6 @@ def yt2imgs(sku, slug):
         "no_warnings": False,  # Show warnings
         "ignoreerrors": True,  # Continue on error
         "no_color": True,  # No colors in output
-        "extractor_args": {"youtube": {"player_client": ["ios"]}},
         # Use cookies.txt if available — lets yt-dlp pick the best working client
         # (android_vr works without PO tokens when cookies are present)
         **({"cookiefile": "../cookies.txt"} if os.path.exists("../cookies.txt") else {}),
