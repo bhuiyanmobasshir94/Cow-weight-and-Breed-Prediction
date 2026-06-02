@@ -30,18 +30,20 @@ def all_cattles():
     # url = "https://admin.bengalmeat.com/api/cattle/"
     url = DATA_VENDOR_URL
     json_response = scrape(url)
-    if json_response["status"] is True:
+    if json_response.get("status") is True:
         data_count = json_response["data"]["count"] + 1
         for offset in range(0, data_count, 20):
             page_url = f"{url}?limit=20&offset={offset}"
             json_response = scrape(page_url)
             DATA_DICT_LIST.extend(json_response["data"]["results"])
-    assert (data_count - 1) == len(DATA_DICT_LIST)
-    logger.info("========================================")
-    logger.info(f"Data count => %s",
-                json_response["data"]["count"], exc_info=1)
-    logger.info("Downloaded data count => %s", len(DATA_DICT_LIST), exc_info=1)
-    logger.info("========================================")
+        assert (data_count - 1) == len(DATA_DICT_LIST)
+        logger.info("========================================")
+        logger.info(f"Data count => %s",
+                    json_response["data"]["count"], exc_info=1)
+        logger.info("Downloaded data count => %s", len(DATA_DICT_LIST), exc_info=1)
+        logger.info("========================================")
+    else:
+        logger.warning("API returned failure status. Response: %s", json_response)
 
 
 def dump_data_dict():
